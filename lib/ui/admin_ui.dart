@@ -21,12 +21,6 @@ class _MyHomePageState extends State<MyHomePage> {
   var context;
   Stream<List<ProductWithImages>> products;
 
-  Widget imageAdded(String image) {
-    return Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Text(image),
-    );
-  }
 
   void _addProduct([ProductWithImages productWithImages]) {
     showDialog(
