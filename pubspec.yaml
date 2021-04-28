@@ -26,7 +26,6 @@ dependencies:
   rxdart: ^0.26.0
   expandable: ^5.0.1
   path_provider: ^2.0.1
-  flutter_bloc: ^6.0.5
   flutter:
     sdk: flutter
 

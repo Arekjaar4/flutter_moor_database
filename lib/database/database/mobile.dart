@@ -8,6 +8,7 @@ import 'package:path/path.dart' as p;
 
 import '../database.dart';
 
+///Constructor de la base de datos para dispositivos moviles
 MyDatabase constructDb({bool logStatements = false}) {
   if (Platform.isIOS || Platform.isAndroid) {
     final executor = LazyDatabase(() async {
@@ -17,13 +18,5 @@ MyDatabase constructDb({bool logStatements = false}) {
     });
     return MyDatabase(executor);
   }
-  if (Platform.isMacOS || Platform.isLinux) {
-    final file = File('db.sqlite');
-    return MyDatabase(VmDatabase(file, logStatements: logStatements));
-  }
-  // if (Platform.isWindows) {
-  //   final file = File('db.sqlite');
-  //   return Database(VMDatabase(file, logStatements: logStatements));
-  // }
   return MyDatabase(VmDatabase.memory(logStatements: logStatements));
 }

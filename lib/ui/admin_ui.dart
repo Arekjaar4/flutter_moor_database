@@ -19,9 +19,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final _formKey = GlobalKey<FormState>();
   var context;
-  Stream<List<ProductWithImages>> products;
 
-
+  /// Formulario para añadir el producto con argumento opcional
   void _addProduct([ProductWithImages productWithImages]) {
     showDialog(
         context: context,
@@ -261,6 +260,7 @@ class _MyHomePageState extends State<MyHomePage> {
         });
   }
 
+  /// Creacion de las Cards para el GridView
   Widget _buildCards(ProductWithImages productWithImages) {
     Product product = productWithImages.product;
     List<ImagesProduct> imagesProduct = productWithImages.imagesProduct;
@@ -366,7 +366,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     db = widget.db;
     this.context = context;
-    products = db.watchAllProducts();
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
@@ -374,7 +373,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: OrientationBuilder(builder: (context, or) {
         int cac = (or == Orientation.portrait) ? 2 : 4;
         return StreamBuilder<List<ProductWithImages>>(
-            stream: products,
+            stream: db.watchAllProducts(),
             builder: (context, snapshot) {
               final List<ProductWithImages> products = snapshot.data ?? [];
               return GridView.count(
